@@ -1,0 +1,203 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link href=" {% static 'img/favicon.ico' %}" rel="shortcut icon"/>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+</head>
+<body>
+
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+{% block header %}
+<!-- Header section -->
+<header class="header-section">
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 text-center text-lg-left">
+                    <!-- logo -->
+                    <a href="/" class="site-logo">
+                        <h3>Youth Shop</h3>
+                    </a>
+                </div>
+                <div class="col-xl-6 col-lg-5">
+                    <form class="header-search-form" action="{% url 'shop:ProductList' %}">
+
+                        <input type="search" placeholder="Search here" name="search" required="">
+                        <button type="submit"><i class="flaticon-search"></i></button>
+                    </form>
+
+                </div>
+                <div class="col-xl-4 col-lg-5">
+                    <div class="user-panel">
+                        <div class="up-item">
+                            <i class="flaticon-profile"></i>
+                            <a href="#">Sign</a> In or <a href="#">Create Account</a>
+                        </div>
+                        <div class="up-item">
+                            {% with total_items=cart|length %}
+                            {% if cart|length > 0 %}
+                            <div class="shopping-card">
+                                <i class="flaticon-bag"></i>
+                                <span>{{ total_items }}</span>
+                            </div>
+                            <a href="{% url 'cart:CartDetail' %}">Shopping Cart</a>
+                            {% else %}
+                            <div class="shopping-card">
+                                <i class="flaticon-bag"></i>
+                                <span>0</span>
+                            </div>
+                            <a href="">Shopping Cart</a>
+                            {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="main-navbar">
+        <div class="container">
+            <!-- menu -->
+            <ul class="main-menu" style="text-align:center;">
+                <li><a href="/">Home</a></li>
+                {% for cat in categories %}
+                <li>
+                <li><a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></li>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </nav>
+</header>
+{% endblock %}
+<!-- Header section end -->
+{% block latest %}
+
+{% endblock %}
+
+{% block content %} {% endblock %}
+
+<!-- Footer section -->
+{% block footer %}
+<section class="footer-section">
+    <div class="container">
+        <div class="footer-logo text-center">
+            <a href="/"><h3>Youth Shop</h3></a>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget about-widget">
+                    <h2>About</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum adipisci, hic perferendis
+                        ducimus omnis! Assumenda dicta laborum harum esse ducimus.</p>
+                    <img src="img/cards.png" alt="">
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="footer-widget about-widget">
+                    <h2>Info</h2>
+                    <ul>
+                        <li><a href="">About Us</a></li>
+                        <li><a href="">Track Orders</a></li>
+                        <li><a href="">Returns</a></li>
+                        <li><a href="">Jobs</a></li>
+                        <li><a href="">Shipping</a></li>
+                        <li><a href="">Blog</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="">Partners</a></li>
+                        <li><a href="">Bloggers</a></li>
+                        <li><a href="">Support</a></li>
+                        <li><a href="">Terms of Use</a></li>
+                        <li><a href="">Press</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget contact-widget">
+                    <h2>Info</h2>
+                    <div class="con-info">
+                        <span>C.</span>
+                        <p>Youth Shop </p>
+                    </div>
+                    <div class="con-info">
+                        <span>B.</span>
+                        <p>Poland, Rzeszów </p>
+                    </div>
+                    <div class="con-info">
+                        <span>T.</span>
+                        <p>+48 667 082 437</p>
+                    </div>
+                    <div class="con-info">
+                        <span>E.</span>
+                        <p>i.stebelskuy@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="social-links-warp">
+        <div class="container">
+            <div class="social-links">
+                <a href="" class="instagram"><i class="fa fa-instagram"></i><span>instagram</span></a>
+
+                <a href="" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a>
+                <a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a>
+                <a href="" class="youtube"><i class="fa fa-youtube"></i><span>youtube</span></a>@
+            </div>
+            <br>
+            <p class="text-white text-center mt-4">Copyright &copy;<script>document.write(new Date().getFullYear());
+
+
+
+            </script>
+                | Illia Stebelskyi
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+<!-- Footer section end -->
+
+<!--====== Javascripts & Jquery ======-->
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/jquery.nicescroll.min.js' %}"></script>
+<script src="{% static 'js/jquery.zoom.min.js' %}"></script>
+<script src="{% static 'js/jquery-ui.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>
+
+</body>
+</html>

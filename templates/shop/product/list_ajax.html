@@ -1,0 +1,20 @@
+{% load static %}
+
+{% for product in products %}
+<div class="col-lg-3 col-sm-6">
+    <div class="product-item" style="">
+        <div class="pi-pic">
+            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no-image.jpg'%}{% endif %}"
+                 alt="" style="">
+            <div class="pi-links">
+                <a href="{{ product.get_absolute_url }}" class="add-card"><i
+                        class="flaticon-bag"></i><span>READ MORE</span></a>
+            </div>
+        </div>
+        <div class="pi-text">
+            <h6>{{product.price}}$</h6>
+            <p>{{ product.name }}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}

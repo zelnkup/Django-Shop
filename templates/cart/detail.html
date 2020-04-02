@@ -1,0 +1,74 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block title %} Cart {% endblock %}
+{% block content %}
+
+
+<!-- cart section -->
+<section class="cart-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="cart-table">
+                    <h3>Your Cart</h3>
+                    <div class="cart-table-warp">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th class="product-th">Product</th>
+                                <th class="quy-th">Quantity</th>
+                                <th class="size-th">Delete</th>
+                                <th class="total-th">Price</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in cart %}
+                            {% with product=item.product %}
+                            <tr>
+                                <td class="product-col">
+                                    <img src="{{ product.image.url }}" alt="">
+                                    <div class="pc-title">
+                                        <h4>{{ product.name }}</h4>
+                                        <p>${{ item.price }}</p>
+                                    </div>
+                                </td>
+                                <!--                                <td class="quy-col">-->
+                                <!--                                    <div class="quantity">-->
+                                <!--                                        <div class="pro-qty">-->
+                                <!--                                            <input type="text" value="1">-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+                                <!--                                </td>-->
+                                <td>
+                                    <form action="{% url 'cart:CartAdd' product.id %}" method="post" class="add">
+                                        {{ item.update_quantity_form.quantity }}
+                                        {{ item.update_quantity_form.update }}
+                                        {% csrf_token %}
+                                        <input type="submit" value="Change">
+                                    </form>
+                                </td>
+                              <td class="size-col"><a href="{% url 'cart:CartRemove' product.id %}"><h4>Delete</h4></a></td>
+
+                                <td class="total-col"><h4>${{ item.total_price }}</h4></td>
+
+                            </tr>
+                            {% endwith %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="total-cost">
+                        <h6>Total <span>${{ cart.get_total_price }}</span></h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 card-right">
+                <a href="{% url 'orders:OrderCreate' %}" style="background: rgba(0,0,255,0.7);" class="site-btn">Proceed to checkout</a>
+                <a href="{% url 'shop:ProductList'%}" class="site-btn sb-dark">Continue shopping</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- cart section end -->
+
+{% endblock %}

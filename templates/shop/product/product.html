@@ -1,0 +1,92 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %} {{ product.name }} {% endblock %}
+{% block latest %} {% if category %} {% endif%} {% endblock %}
+
+{% block content %}
+<!-- product section -->
+<section class="product-section">
+    <div class="container">
+        <div class="back-link">
+            <a href="{{ product.category.get_absolute_url }}">&lt;&lt; Back to Category</a>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="">
+                    <img class="product-big-img"
+                         src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no-image.jpg'%}{% endif %}"
+                         alt="">
+                </div>
+            </div>
+            <div class="col-lg-6 product-details">
+                <h2 class="p-title">{{ product.name }}</h2>
+                <h3 class="p-price">{{ product.price }}$</h3>
+                <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
+                <div id="accordion" class="accordion-area">
+                    <div class="panel">
+                        <div class="panel-header" id="headingOne">
+                            <button class="panel-link active" data-toggle="collapse" data-target="#collapse1"
+                                    aria-expanded="true" aria-controls="collapse1">Description
+                            </button>
+                        </div>
+                        <div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="panel-body">
+                                {{ product.description | linebreaks}}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <form action="{% url 'cart:CartAdd' product.id %}" method="post">
+
+                    <label for="id_quantity" style="font-size:20px;">Quantity:</label><select name="quantity"
+                                                                                              style="font-size:16px;"
+                                                                                              id="id_quantity">
+                    <option value="1">1</option>
+
+                    <option value="2">2</option>
+
+                    <option value="3">3</option>
+
+                    <option value="4">4</option>
+
+                    <option value="5">5</option>
+
+                    <option value="6">6</option>
+
+                    <option value="7">7</option>
+
+                    <option value="8">8</option>
+
+                    <option value="9">9</option>
+
+                    <option value="10">10</option>
+
+                    <option value="11">11</option>
+
+                    <option value="12">12</option>
+
+                    <option value="13">13</option>
+
+                    <option value="14">14</option>
+
+                    <option value="15">15</option
+
+                </select><input type="hidden" name="update" value="False" id="id_update">
+
+                    {% csrf_token %}
+                    <input type="submit" class="site-btn" value="Add to cart">
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- product section end -->
+{% endblock %}
+
+
+
+
+
+
