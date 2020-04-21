@@ -5,61 +5,68 @@
 {% block latest %} {% if category %} {% elif search_query %}  {% else %}
 
 <section class="top-letest-product-section">
-    <div class="container">
-        <div class="section-title">
-            {% if category %} {{ category.name }}{% else %} <h2>LATEST PRODUCTS</h2> {% endif %}
-        </div>
-        <div class="product-slider owl-carousel">
-            {% for newproduct in newproducts %}
-            <div class="product-item">
-                <div class="pi-pic">
-                    <div class="tag-new">New</div>
-                    <img src="{% if newproduct.image %}{{ newproduct.image.url }}{% else %}{% static 'img/no-image.jpg'%}{% endif %}"
-                         alt="">
-                    <div class="pi-links">
-                        <a href="{{ newproduct.get_absolute_url }}" class="add-card"><i class="flaticon-bag"></i><span>READ MORE</span></a>
-                    </div>
-                </div>
-                <div class="pi-text">
-                    <h6>{{ newproduct.price}}$</h6>
-                    <p>{{ newproduct.name }}</p>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+  <div class="container">
+    <div class="section-title">
+      {% if category %} {{ category.name }}{% else %} <h2>LATEST PRODUCTS</h2> {% endif %}
     </div>
+
+    <div class="product-slider owl-carousel">
+      {% for newproduct in newproducts %}
+      <div class="product-item">
+        <div class="pi-pic">
+          <div class="tag-new">New</div>
+          <img
+              src="{% if newproduct.image %}{{ newproduct.image.url }}{% else %}{% static 'img/no-image.jpg'%}{% endif %}"
+              alt="">
+          <div class="pi-links">
+            <a href="{{ newproduct.get_absolute_url }}" class="add-card"><i
+                class="flaticon-bag"></i><span>READ MORE</span></a>
+          </div>
+        </div>
+        <div class="pi-text">
+          <h6>{{ newproduct.price}}$</h6>
+          <p>{{ newproduct.name }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </section>
 {% endif %}
 {% endblock %}
+
 {% block content %}
 {% if products %}
 <br>
 <section class="product-filter-section">
-    {% if category %} <h2 style="text-align: center;"> {{ category.name }} </h2> {% else %}{% endif %}
-    <br>
-    <div class="container">
-        <div class="section-title">
-            {% if search_query %}
-            <h2 style="text-align: left;">Results for:<p> {{ search_query }}</p></h2>
-            {% else %} <h2>LIST OF PRODUCTS</h2> {% endif %}
-        </div>
-        <div class="row" id="project_list">
-            {% include 'shop/product/list_ajax.html' %}
+  {% if category %} <h2 style="text-align: center;"> {{ category.name }} </h2> {% else %}{% endif %}
+  <br>
+  <div class="container">
+    <div class="section-title">
+      {% if search_query %}
+      <h2 style="text-align: left;">Results for:<p> {{ search_query }}</p></h2>
+      {% else %} <h2>LIST OF PRODUCTS</h2> {% endif %}
+    </div>
 
-        </div>
-        <div class="row" id="preloader" style="text-align: center;">
-            .....
-        </div>
-        <div class="container" style="text-align: center;">
-            <button class="btn waves-effect waves-light" id="lazy_more">
-                <a href="" class="site-btn sb-line sb-dark"> LOAD MORE</a>
-            </button>
-            <br>
-            <br>
-            <br>
-            <h2 id="nomore" style="text-align:center;">Ooops, it looks like products are finished, <br> We will
-                replenish more products soon...</h2>
-        </div>
+    <div class="row" id="project_list">
+      {% include 'shop/product/list_ajax.html' %}
+
+    </div>
+    <div class="row" id="preloader" style="text-align: center;">
+      .....
+    </div>
+    {% if search_query %} {% else %}
+    <div class="container" style="text-align: center;">
+      <button class="btn waves-effect waves-light" id="lazy_more">
+        <a href="" class="site-btn sb-line sb-dark"> LOAD MORE</a>
+      </button>
+      <br>
+      <br>
+      <br>
+      <h2 id="nomore" style="text-align:center;">Ooops, it looks like products are finished, <br> We will
+        replenish more products soon...</h2>
+    </div>
+    {% endif %}
 </section>
 {% else %}
 <br>
@@ -70,67 +77,65 @@
 <br>
 <h2 style="padding-left:40px; text-align: center;"> Check our newest items!</h2>
 <section class="top-letest-product-section">
-    <div class="container">
-        <div class="section-title">
-        </div>
-        <div class="product-slider owl-carousel">
-            {% for newproduct in newproducts %}
-            <div class="product-item">
-                <div class="pi-pic">
-                    <div class="tag-new">New</div>
-                    <img src="{% if newproduct.image %}{{ newproduct.image.url }}{% else %}{% static 'img/no-image.jpg'%}{% endif %}"
-                         alt="">
-                    <div class="pi-links">
-                        <a href="{{ newproduct.get_absolute_url }}" class="add-card"><i class="flaticon-bag"></i><span>READ MORE</span></a>
-                    </div>
-                </div>
-                <div class="pi-text">
-                    <h6>{{ newproduct.price}}$</h6>
-                    <p>{{ newproduct.name }}</p>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+  <div class="container">
+    <div class="section-title">
     </div>
+    <div class="product-slider owl-carousel">
+      {% for newproduct in newproducts %}
+      <div class="product-item">
+        <div class="pi-pic">
+          <div class="tag-new">New</div>
+          <img
+              src="{% if newproduct.image %}{{ newproduct.image.url }}{% else %}{% static 'img/no-image.jpg'%}{% endif %}"
+              alt="">
+          <div class="pi-links">
+            <a href="{{ newproduct.get_absolute_url }}" class="add-card"><i
+                class="flaticon-bag"></i><span>READ MORE</span></a>
+          </div>
+        </div>
+        <div class="pi-text">
+          <h6>{{ newproduct.price}}$</h6>
+          <p>{{ newproduct.name }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </section>
 {% endif %}
+
 <script>
-/*------------------
-		Lazy load
-	--------------------*/
+  /*------------------
+      Lazy load
+    --------------------*/
 
-var page = 1;
-var empty_page = false;
-var block_request = false;
+  var page = 1;
+  var empty_page = false;
+  var block_request = false;
 
-$('#nomore').hide();
+  $('#nomore').hide();
 
-$('#lazy_more').click(function (e) {
+  $('#lazy_more').click(function(e) {
     e.preventDefault();
     if (empty_page === false && block_request === false) {
-        block_request = true;
-        page += 1;
-        $('#preloader').show();
-        $.get('?page=' + page, function (data) {
-            $('#preloader').hide();
-<!--  To hide load more button -->
-<!--  $('#lazy_more').hide();   -->
-            if (data === '') {
-                empty_page = true;
-                $('#lazy_more').hide();
-                $('#nomore').show();
-            } else {
-                block_request = false;
-                $('#project_list').append(data);
-            }
-        });
+      block_request = true;
+      page += 1;
+      $('#preloader').show();
+      $.get('?page=' + page, function(data) {
+        $('#preloader').hide();
+        <!--  To hide load more button -->
+        <!--  $('#lazy_more').hide();   -->
+        if (data === '') {
+          empty_page = true;
+          $('#lazy_more').hide();
+          $('#nomore').show();
+        } else {
+          block_request = false;
+          $('#project_list').append(data);
+        }
+      });
     }
-});
-
-
-
-
-
+  });
 
 
 </script>

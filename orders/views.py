@@ -25,6 +25,7 @@ def OrderCreate(request):
                                          price=item['price'],
                                          quantity=item['quantity'])
             cart.clear()
+            cart.coupon.delete()
             # launch asynchronous task
             order_created.delay(order.id)
             return render(request, 'orders/order/created.html', {'order': order,

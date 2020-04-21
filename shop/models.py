@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-
+import django_filters
 
 class Category(models.Model):
     name = models.CharField(max_length=200, db_index=True)
@@ -49,3 +49,4 @@ class Product(models.Model):
     # Function for forming url for detail view of product
     def get_absolute_url(self):
         return reverse('shop:ProductDetail', args=[self.id, self.slug])
+
