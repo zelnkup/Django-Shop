@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'y$z&te)3f(l4v51kqnyut$a*+9+n8wzrsel*b&*y^f!-(g*tkg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -42,7 +42,6 @@ INSTALLED_APPS = [
 	'coupons',
 
 	'bootstrap3',
-	'django_filters',
 ]
 
 MIDDLEWARE = [

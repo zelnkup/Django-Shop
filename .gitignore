@@ -2,9 +2,9 @@
 __pycache__
 venv
 mockups
-static
 shop/static
 run_web.sh
 run_celery.sh
 Dockerfile
 docker-compose.yml
+db.sqlite3

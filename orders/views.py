@@ -2,9 +2,24 @@ from django.shortcuts import render
 from .models import OrderItem
 from .forms import OrderCreateForm
 from cart.cart import Cart
-from .tasks import order_created
+# from .tasks import order_created
 from shop.models import Product
 from shop.models import Category
+from django.core.mail import send_mail
+from .models import Order
+
+
+# django email backend
+def order_created(order_id):
+    order = Order.objects.get(id=order_id)
+    subject = 'Order nr. {}'.format(order.id)
+    message = 'Dear {}.\nThis email confirms that you have successfully placed an order nr.  {}.\n For any information write to i.stebelskuy@gmail.com'.format(
+        order.first_name, order.id)
+    send_mail(subject,
+              message,
+              'pozdr.pl@gmail.com',
+              [order.email])
+    return send_mail
 
 
 def OrderCreate(request):
@@ -25,9 +40,11 @@ def OrderCreate(request):
                                          price=item['price'],
                                          quantity=item['quantity'])
             cart.clear()
-            cart.coupon.delete()
             # launch asynchronous task
-            order_created.delay(order.id)
+            # order_created.delay(order.id)
+            # Django email backend
+            order_created(order.id)
+
             return render(request, 'orders/order/created.html', {'order': order,
                                                                  'categories': categories,
                                                                  })
