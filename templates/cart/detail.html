@@ -64,7 +64,7 @@
       </div>
       <div class="col-lg-4 card-right">
         <form action="{% url 'coupons:apply' %}" method="POST" class="promo-code-form">
-          <label for="id_code"></label><input type="text" name="code" required="" placeholder="Enter promo code"
+          <label for="id_code"></label><input type="text" name="code" required="" placeholder="Try 'test'"
                                               id="id_code">
           {% if messages %}
           {% for message in messages %}
